@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Hello World!",
+        "description": "This is what the noobs use when they are first starting out on their coding journey."
+    },
+    {
+        "name": "Why did the edge server go bankrupt?",
+        "description": "Because it ran out of cache."
+    },
+    {
+        "name": "Useful tools in your day-to-day",
+        "description": "I like to listen to lo-fi music when I'm coding with a warm cup of tea. I try to make the experience as relaxing as possible. When I'm in a rut, I will seek out W3Schools for assistance, or ask my colleagues."
+    }
+]
