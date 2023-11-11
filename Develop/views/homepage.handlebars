@@ -1,0 +1,13 @@
+{{#if blogs.length}}
+<ul>
+  {{#each blogs}}
+  <li>
+    <h2>{{name}}</h2>
+    <p>{{description}}</p>
+    <p>Written by: {{user.name}}</p>
+  </li>
+  {{/each}}
+</ul>
+{{else}}
+<p>No blogs available.</p>
+{{/if}}

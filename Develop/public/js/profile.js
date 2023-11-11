@@ -1,53 +1,46 @@
-const loginFormHandler = async (event) => {
+const newFormHandler = async (event) => {
   event.preventDefault();
 
-  // Collect values from the login form
-  const email = document.querySelector("#email-login").value.trim();
-  const password = document.querySelector("#password-login").value.trim();
+  const name = document.querySelector("#blog-name").value.trim();
+  const description = document.querySelector("#blog-desc").value.trim();
 
-  if (email && password) {
-    // Send a POST request to the API endpoint
-    const response = await fetch("/api/users/login", {
+  if (name && description) {
+    const response = await fetch(`/api/blogs`, {
       method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.ok) {
-      // If successful, redirect the browser to the profile page
-      document.location.replace("/profile");
-    } else {
-      alert(response.statusText);
-    }
-  }
-};
-
-const signupFormHandler = async (event) => {
-  event.preventDefault();
-
-  const name = document.querySelector("#name-signup").value.trim();
-  const email = document.querySelector("#email-signup").value.trim();
-  const password = document.querySelector("#password-signup").value.trim();
-
-  if (name && email && password) {
-    const response = await fetch("/api/users", {
-      method: "POST",
-      body: JSON.stringify({ name, email, password }),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, description }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     if (response.ok) {
       document.location.replace("/profile");
     } else {
-      alert(response.statusText);
+      alert("Failed to create blog");
+    }
+  }
+};
+
+const delButtonHandler = async (event) => {
+  if (event.target.hasAttribute("data-id")) {
+    const id = event.target.getAttribute("data-id");
+
+    const response = await fetch(`/api/blogs/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      document.location.replace("/profile");
+    } else {
+      alert("Failed to delete blog");
     }
   }
 };
 
 document
-  .querySelector(".login-form")
-  .addEventListener("submit", loginFormHandler);
+  .querySelector(".new-blog-form")
+  .addEventListener("submit", newFormHandler);
 
 document
-  .querySelector(".signup-form")
-  .addEventListener("submit", signupFormHandler);
+  .querySelector(".blog-list")
+  .addEventListener("click", delButtonHandler);
